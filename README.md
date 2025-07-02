@@ -1,3 +1,5 @@
+Download only oproject directory and add it to the root folder of the hailo rpi5 examples repo on your Rpi 5
+
 To activate the project first use the following commands
 
 #change the gmail api key to your api key in  helperson.py
