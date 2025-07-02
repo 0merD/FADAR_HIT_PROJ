@@ -1,204 +1,58 @@
+To activate the project first use the following commands
 
-![Banner](doc/images/hailo_rpi_examples_banner.png)
-
-# Hailo Raspberry Pi 5 Examples
-
-Welcome to the Hailo Raspberry Pi 5 Examples repository. This project showcases various examples demonstrating the capabilities of the Hailo AI processor on a Raspberry Pi 5. These examples will help you get started with AI on embedded devices.
-The examples in this repository are designed to work with the Raspberry Pi AI Kit and AI HAT, supporting both the Hailo8 (26 TOPS) and Hailo8L (13 TOPS) AI processors. The examples can also be run on an x86_64 Ubuntu machine with the Hailo8/8L AI processor.
-Visit the [Hailo Official Website](https://hailo.ai/) and [Hailo Community Forum](https://community.hailo.ai/) for more information.
-
-## Install Hailo Hardware and Software Setup on Raspberry Pi
-
-For instructions on how to set up Hailo's hardware and software on the Raspberry Pi 5, see the [Hailo Raspberry Pi 5 installation guide](doc/install-raspberry-pi5.md#how-to-set-up-raspberry-pi-5-and-hailo).
-
-
-# Hailo RPi5 Basic Pipelines
-The basic pipelines examples demonstrate object detection, human pose estimation, and instance segmentation, providing a solid foundation for your own projects.
-This repo is using our new [Hailo Apps Infra](https://github.com/hailo-ai/hailo-apps-infra) repo as a dependency.
-See our Developement Guide for more information on how to use the pipelines to create your own custom pipelines.
-
-## Installation
-
-### Clone the Repository
-```bash
-git clone https://github.com/hailo-ai/hailo-rpi5-examples.git
-```
-Navigate to the repository directory:
-```bash
-cd hailo-rpi5-examples
-```
-
-### Installation
-Run the following script to automate the installation process:
-```bash
-./install.sh
-```
-
-### Documentation
-For additional information and documentation on how to use the pipelines to create your own custom pipelines, see the [Basic Pipelines Documentation](doc/basic-pipelines.md).
-
-### Running The Examples
-When opening a new terminal session, ensure you have sourced the environment setup script:
-```bash
+#change the gmail api key to your api key in  helperson.py
+<YOURGMAIAPIKEY>
+# change directory to hailo-rpi5-examples
+cd <yourpathhere>/ailo-rpi5-examples
+# run the virtual environment 
 source setup_env.sh
-```
-### Detection Example
+# assuming you have the assembled robot change directory to project directory
+cd /project_directory
+# run the main loop
+python mainloop.py
 
-![Detection Example](doc/images/detection.gif)
+robotics platform files:
+https://www.printables.com/model/1344093-robotics-platform-for-raspberry-pi-5-with-28-byj-4
 
-#### Run the simple detection example:
-```bash
-python basic_pipelines/detection_simple.py
-```
-To close the application, press `Ctrl+C`.
+# assembly  instructions
+use 2 l298n DC motor drivers
+use 2 28byj-48 stepper motors
+hook up the motors to the drivers in the following order
+out1 to blue motor wire
+out2 to pink motor wire
+out3 to yellow motor wire
+out4 to orange motor wire
 
-This is lightweight version of the detection example, mainly focusing on demonstrating Hailo performance while minimizing CPU load. The internal GStreamer video processing pipeline is simplified by minimizing video processing tasks, and the YOLOv6 Nano model is used.
+use an otterbox obftc 0041 A powerbank (or smaller) as a powersource for the drivers 
+use a raspberry pi 5 with an hailo AI kit or AI HAT+
+use a UPS HAT of your choosing to power the logic while disconnected from electricity (original project used geekworm X1200)
+use 1 pushbutton
+use a light bluetooth or usb speaker of your choosing. we used a jbl go3
+use a Pi camera module 3 75 degrees FOV (either regular or without IR filter)
+breadbord recommanded but optional
+use a striped usb wire or a usb to pin adapter to provide  voltage to the motor drivers 
+aqquire 4 8x15x5 ball bearings for the support wheels
+aqquire or print 2 silicone/rubber/tpu wrist bands as tires for the driving wheels 
+print the robot's body, and wheels (4 thin support wheels and 2 thick driving wheels) out of PETG (we used sanlu elitepetg in space gray) with 10% gyroid infill and 3 walls 
+print at least 2 battery plugs if you use otterbox obftc 0041 as a power bank (recommended at both 100 and 105% scale for minor variances)
+print the 4 connection lugs that will connect the robot's body to the wheels
+install the bearings onto the support wheels.
+insert the connection lugs thick side into the robots main body
+insert the 2 stepper motors into their housing on the robots main body
+connect the driving wheels to the stepper motors
+install the tires onto the driver wheels
+gently screw your rapsberry pi assembply into the case with the usb side faceing away from the powerbank slot and towards the camera holder
+insert the battery bank 
+insert the battery holder plugs to hold the battery
+connet the pi camera to the Rpi
+mount the pi camera on the from of the robot on the dedicated pi camera 3 housing
 
-#### Run the full detection example:
-This is the full detection example, including object tracker and multiple video resolution support - see more information [Detection Example Documentation](doc/basic-pipelines.md#detection-example):
-
-```bash
-python basic_pipelines/detection.py
-```
-To close the application, press `Ctrl+C`.
-
-#### Running with Raspberry Pi Camera input:
-```bash
-python basic_pipelines/detection.py --input rpi
-```
-
-#### Running with USB camera input (webcam):
-There are 2 ways:
-
-Specify the argument `--input` to `usb`:
-```bash
-python basic_pipelines/detection.py --input usb
-```
-
-This will automatically detect the available USB camera (if multiple are connected, it will use the first detected).
-
-Second way:
-
-Detect the available camera using this script:
-```bash
-get-usb-camera
-```
-Run example using USB camera input - Use the device found by the previous script:
-```bash
-python basic_pipelines/detection.py --input /dev/video<X>
-```
-
-For additional options, execute:
-```bash
-python basic_pipelines/detection.py --help
-```
-
-#### Retrained Networks Support
-This application includes support for using retrained detection models. For more information, see [Using Retrained Models](doc/basic-pipelines.md#using-retrained-models).
-
-### Pose Estimation Example
-For more information see [Pose Estimation Example Documentation.](doc/basic-pipelines.md#pose-estimation-example)
-![Pose Estimation Example](doc/images/pose_estimation.gif)
-
-#### Run the pose estimation example:
-```bash
-python basic_pipelines/pose_estimation.py
-```
-To close the application, press `Ctrl+C`.
-See Detection Example above for additional input options examples.
-
-### Instance Segmentation Example
-For more information see [Instance Segmentation Example Documentation.](doc/basic-pipelines.md#instance-segmentation-example)
-![Instance Segmentation Example](doc/images/instance_segmentation.gif)
-
-#### Run the instance segmentation example:
-```bash
-python basic_pipelines/instance_segmentation.py
-```
-To close the application, press `Ctrl+C`.
-See Detection Example above for additional input options examples.
-
-### Depth Estimation Example
-For more information see [Depth Estimation Example Documentation.](doc/basic-pipelines.md#depth-estimation-example)
-![Depth Estimation Example](doc/images/depth.gif)
-
-#### Run the depth estimation example:
-```bash
-python basic_pipelines/depth.py
-```
-To close the application, press `Ctrl+C`.
-See Detection Example above for additional input options examples.
-
-### Community Projects
-
-Get involved and make your mark! Explore our Community Projects and start contributing today, because together, we build better things! 🚀
-Check out our [Community Projects](community_projects/community_projects.md) for more information.
-
-# Additional Examples and Resources
-
-![Hailo Examples Code Structure](doc/images/hailo_examples_code_structure.svg)
-
-## Hailo Apps Infra
-Hailo RPi5 Examples are using the [Hailo Apps Infra Repository](https://github.com/hailo-ai/hailo-apps-infra) as a dependency. The Hailo Apps Infra repository contains the infrastructure of Hailo applications and pipelines.
-It is aimed for to provide tools for developers who want to create their own custom pipelines and applications. It features a simple and easy-to-use API for creating custom pipelines and applications.
-It it installed as a pip package and can be used as a dependency in your own projects. See more information in its documentation and Development Guide.
-
-### CLIP Application
-
-CLIP (Contrastive Language-Image Pre-training) predicts the most relevant text prompt on real-time video frames using Hailo8/8l AI processor.
-See the [hailo-CLIP Repository](https://github.com/hailo-ai/hailo-CLIP) for more information.
-Click the image below to watch the demo on YouTube.
-
-[![Watch the demo on YouTube](https://img.youtube.com/vi/XXizBHtCLew/0.jpg)](https://youtu.be/XXizBHtCLew)
+connect the gpio pins to the motors in the following order and use this delay 
+left_in1_pin=17, left_in2_pin=27, left_in3_pin=22, left_in4_pin=24, # Example pins for Left Motor
+right_in1_pin=5, right_in2_pin=6, right_in3_pin=13, right_in4_pin=19, # Example pins for Right Motor
+min_delay=0.0015
+to out 1-4 on the drivers accordingly
+connect the pushbutton to gpio 15 and to ground
 
 
-#### Frigate Integration - Coming Soon
 
-Frigate is an open-source video surveillance software that runs on a Raspberry Pi. This integration will allow you to use the Hailo-8L AI processor for object detection in real-time video streams.
-
-
-### Raspberry Pi Official Examples
-
-#### rpicam-apps
-
-Raspberry Pi [rpicam-apps](https://www.raspberrypi.com/documentation/computers/camera_software.html#rpicam-apps) Hailo post-processing examples.
-This is Raspberry Pi's official example for AI post-processing using the Hailo AI processor integrated into their CPP camera framework.
-The documentation on how to use rpicam-apps can be found [here](https://www.raspberrypi.com/documentation/computers/ai.html).
-
-#### picamera2
-
-Raspberry Pi [picamera2](https://github.com/raspberrypi/picamera2) is the libcamera-based replacement for Picamera, which was a Python interface to the Raspberry Pi's legacy camera stack. Picamera2 also presents an easy-to-use Python API.
-
-## Additional Resources
-
-### Hailo Python API
-The Hailo Python API is now available on the Raspberry Pi 5. This API allows you to run inference on the Hailo-8L AI processor using Python.
-For examples, see our [Python code examples](https://github.com/hailo-ai/Hailo-Application-Code-Examples/tree/main/runtime/python).
-Additional examples can be found in RPi [picamera2](#picamera2) code.
-Visit our [HailoRT Python API documentation](https://hailo.ai/developer-zone/documentation/hailort-v4-18-0/?page=api%2Fpython_api.html#module-hailo_platform.drivers) for more information.
-
-### Hailo Dataflow Compiler (DFC)
-
-The Hailo Dataflow Compiler (DFC) is a software tool that enables developers to compile their neural networks to run on the Hailo-8/8L AI processors.
-The DFC is available for download from the [Hailo Developer Zone](https://hailo.ai/developer-zone/software-downloads/) (Registration required).
-For examples, tutorials, and retrain instructions, see the [Hailo Model Zoo Repo](https://github.com/hailo-ai/hailo_model_zoo).
-Additional documentation and [tutorials](https://hailo.ai/developer-zone/documentation/dataflow-compiler/latest/?sp_referrer=tutorials/tutorials.html) can be found in the [Hailo Developer Zone Documentation](https://hailo.ai/developer-zone/documentation/).
-For a full end-to-end training and deployment example, see the [Retraining Example](doc/retraining-example.md).
-The detection basic pipeline example includes support for retrained models. For more information, see [Using Retrained Models](doc/basic-pipelines.md#using-retrained-models).
-
-## Contributing
-
-We welcome contributions from the community. You can contribute by:
-1. Contribute to our [Community Projects](community_projects/community_projects.md).
-2. Reporting issues and bugs.
-3. Suggesting new features or improvements.
-4. Joining the discussion on the [Hailo Community Forum](https://community.hailo.ai/).
-
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Disclaimer
-
-This code example is provided by Hailo solely on an “AS IS” basis and “with all faults.” No responsibility or liability is accepted or shall be imposed upon Hailo regarding the accuracy, merchantability, completeness, or suitability of the code example. Hailo shall not have any liability or responsibility for errors or omissions in, or any business decisions made by you in reliance on this code example or any part of it. If an error occurs when running this example, please open a ticket in the "Issues" tab.
