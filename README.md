@@ -1,4 +1,4 @@
-Download only oproject directory and add it to the root folder of the hailo rpi5 examples repo on your Rpi 5
+![2fab83da-c91f-4af4-85c7-2cefc2211d6b](https://github.com/user-attachments/assets/6dc1a2e6-1bf3-4375-b92d-afe55065f053)Download only project directory and add it to the root folder of the hailo rpi5 examples repo on your Rpi 5
 
 To activate the project first use the following commands
 
@@ -55,6 +55,8 @@ right_in1_pin=5, right_in2_pin=6, right_in3_pin=13, right_in4_pin=19, # Example 
 min_delay=0.0015
 to out 1-4 on the drivers accordingly
 connect the pushbutton to gpio 15 and to ground
+
+![Screenshot 2025-07-02 104456](https://github.com/user-attachments/assets/5f60053e-9d37-4e85-ac1a-ec5816009ea7)
 
 
 
