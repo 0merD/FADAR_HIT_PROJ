@@ -56,6 +56,8 @@ min_delay=0.0015
 to out 1-4 on the drivers accordingly
 connect the pushbutton to gpio 15 and to ground
 
+connect a bluetooth or usb speaker to your raspberry pi
+
 ![Screenshot 2025-07-02 104456](https://github.com/user-attachments/assets/5f60053e-9d37-4e85-ac1a-ec5816009ea7)
 
 
