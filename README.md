@@ -5,7 +5,7 @@ To activate the project first use the following commands
 #change the gmail api key to your api key in  helperson.py
 <YOURGMAIAPIKEY>
 # change directory to hailo-rpi5-examples
-cd <yourpathhere>/ailo-rpi5-examples
+cd <yourpathhere>/hailo-rpi5-examples
 # run the virtual environment 
 source setup_env.sh
 # assuming you have the assembled robot change directory to project directory
